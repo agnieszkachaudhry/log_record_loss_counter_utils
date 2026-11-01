@@ -61,3 +61,10 @@ fire.
 
 Negative `flush_interval` raises `ValueError`. `flush_interval=0.0` flushes on
 every emit.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
